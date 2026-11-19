@@ -38,7 +38,7 @@ export default function useWorkspace() {
   const checkSession = useCallback(async () => {
     try {
       const data = await request('/api/session', token);
-      if (data.mode === 'local' && !data.user && token) {
+      if (data.mode !== 'hosted' && !data.user && token) {
         localStorage.removeItem(tokenKey);
         setToken(null);
       }
@@ -97,7 +97,7 @@ export default function useWorkspace() {
     setRemote([]);
     setLoaded(false);
     setToken(data.token);
-    setSession({ mode: 'local', user: data.user });
+    setSession({ mode: data.mode ?? 'local', user: data.user });
   }
 
   function signOut() {

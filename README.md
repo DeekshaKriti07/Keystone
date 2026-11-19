@@ -43,3 +43,11 @@ Use a single instance with HTTPS and persistent storage. Use `/api/health` for t
 `npm run build:worker` produces the existing platform adapter in `dist`. It requires the hosting platform’s trusted identity integration and a D1 `DB` binding initialized with `drizzle/0000_taskflow.sql`. Use the standalone Express build for email and password registration.
 
 The homepage wordmark and dashboard shortcuts adapt the supplied React Bits TechText and GlassIcons samples. The slide-out workspace menu adapts the supplied StaggeredMenu interaction using a native dialog. The Flow Wave uses the supplied particle shaders and the Keystone palette.
+
+## Vercel with a new database
+
+Import this repository into Vercel with the repository root as the project root. The checked-in Vercel configuration installs and builds the frontend and wires the API. Use Node.js 24.
+
+Connect a fresh Neon database via the Vercel Marketplace. Set `DATABASE_URL` to the Neon connection string and set `JWT_SECRET` to a random secret of at least 32 characters in the Vercel project's environment settings. Run [scripts/neon-schema.sql](scripts/neon-schema.sql) in the Neon SQL editor for the database configured above, then deploy or redeploy the project. Preview deployments require their own configured environment and should use a separate database branch if enabled.
+
+Verify `/api/health` returns `{"status":"ok"}`, then register a new account, save a task, and reload the workspace. Accounts and tasks start empty on this deployment. Vercel synchronizes task state through the client's existing polling and visibility refresh.

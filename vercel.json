@@ -1,0 +1,11 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "npm ci && npm --prefix client ci",
+  "buildCommand": "npm run build",
+  "outputDirectory": "client/dist",
+  "rewrites": [
+    { "source": "/api/:path*", "destination": "/api/keystone?route=:path*" },
+    { "source": "/(auth|dashboard|board|ledger|planner|profile|landing)", "destination": "/index.html" }
+  ]
+}
