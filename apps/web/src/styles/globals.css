@@ -1,0 +1,149 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-ink text-bone font-sans text-body;
+    margin: 0;
+    min-height: 100dvh;
+  }
+
+  ::selection {
+    background: rgba(232, 93, 58, 0.3);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid theme('colors.ember.DEFAULT');
+    outline-offset: 2px;
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: theme('colors.slate.DEFAULT');
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: theme('colors.slate.light');
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* ─── Button system ────────────────────────────────────── */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 font-medium text-caption
+           rounded-lg transition-all duration-200 ease-spring
+           focus-visible:ring-2 focus-visible:ring-ember focus-visible:ring-offset-2
+           focus-visible:ring-offset-ink disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-primary {
+    @apply btn bg-ember text-white px-5 py-2.5
+           hover:bg-ember-light hover:shadow-glow-ember
+           active:scale-[0.98];
+  }
+  .btn-secondary {
+    @apply btn bg-slate text-bone px-5 py-2.5
+           hover:bg-slate-light
+           active:scale-[0.98];
+  }
+  .btn-ghost {
+    @apply btn text-ash px-3 py-2
+           hover:text-bone hover:bg-white/5
+           active:scale-[0.98];
+  }
+  .btn-danger {
+    @apply btn bg-rose/10 text-rose px-5 py-2.5
+           hover:bg-rose/20
+           active:scale-[0.98];
+  }
+  .btn-icon {
+    @apply btn p-2 text-ash hover:text-bone hover:bg-white/5;
+  }
+
+  /* ─── Input system ─────────────────────────────────────── */
+  .input {
+    @apply w-full bg-graphite border border-slate rounded-lg px-3.5 py-2.5
+           text-bone placeholder:text-ash/60
+           transition-colors duration-200
+           focus:border-ember focus:outline-none focus:ring-1 focus:ring-ember/30;
+  }
+  .input-label {
+    @apply block text-caption text-ash font-medium mb-1.5;
+  }
+
+  /* ─── Card system ──────────────────────────────────────── */
+  .card {
+    @apply bg-graphite border border-slate/60 rounded-card shadow-card;
+  }
+  .card-interactive {
+    @apply card cursor-pointer
+           transition-all duration-200 ease-spring
+           hover:border-slate-light hover:shadow-card-hover hover:-translate-y-0.5;
+  }
+
+  /* ─── Status pill ──────────────────────────────────────── */
+  .status-pill {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full
+           text-micro font-semibold uppercase tracking-wider;
+  }
+
+  /* ─── Priority indicator ───────────────────────────────── */
+  .priority-dot {
+    @apply w-2 h-2 rounded-full flex-shrink-0;
+  }
+
+  /* ─── Drag overlay ─────────────────────────────────────── */
+  .drag-overlay {
+    @apply shadow-card-drag scale-[1.02] rotate-[1deg] opacity-90;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-ember to-amber bg-clip-text text-transparent;
+  }
+
+  .glass {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10;
+  }
+
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+

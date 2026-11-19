@@ -1,0 +1,16 @@
+{
+  "name": "keystone",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "setup": "npm --prefix client ci && npm --prefix server ci",
+    "dev": "node scripts/dev.mjs",
+    "build": "npm --prefix client run build",
+    "start": "npm --prefix server start",
+    "test": "node --test tests/*.test.mjs",
+    "build:worker": "npm run build && node scripts/build.mjs"
+  }
+}
